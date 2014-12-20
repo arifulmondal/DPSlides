@@ -1,75 +1,79 @@
 ---
-title       : Shiny Data Analysis and Clustering
-subtitle    : Data Science - Data Product Project
-author      : Ariful Mondal
-job         : Learner
-framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
-highlighter : highlight.js  # {highlight.js, prettify, highlight}
-hitheme     : tomorrow      # 
-widgets     : []            # {mathjax, quiz, bootstrap}
-mode        : selfcontained # {standalone, draft}
-knit        : slidify::knit2slides
+title: "Shiny Data Analysis and Clustering"
+author: "Ariful Mondal"
+highlighter: highlight.js
+output: pdf_document
+job: This is a Basic data analysis and clustering application built on Shiny. 
+knit: slidify::knit2slides
+mode: selfcontained
+hitheme: tomorrow
+subtitle: Apps- https://arifulmondal.shinyapps.io/projects/
+framework: io2012
+widgets: []
+
+
 ---
 
-## Features [1/3]
+## Feature 1: Basic Data Analysis
 
-This is a Basic data analysis and clustering shiny application. The application can be accessed from <https://arifulmondal.shinyapps.io/projects/>. This application has primarily 3 different features along with import/export functionalities as described in the below slides.
+First feature is to analyze data and display some observations, basic summary, scatter plots and correlations. For example.  
 
-### Feature 1: Basic Data Analysis
+
+```r
+summary(iris)
+```
 
 ```
-1. OBSERVATIONS: Priniting first few observations from the dataset selected applying the function `head`. 
-
-2. SUMMARY: It would print summary of the data by applying `summary` and `str` functions .
-
-3. SCATTER PLOT: Application would also plot the relations between the variables/columns using `plot`
-
-4. CORRELATION: Calculates correlations using `cor` functions on numeric columns.
+##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+##  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+##        Species  
+##  setosa    :50  
+##  versicolor:50  
+##  virginica :50  
+##                 
+##                 
+## 
 ```
 
 --- .class #id 
 
-## Features [2/3]
+## Feature 2: Create A Searchable Datasheet
 
-
-### Feature 2: Create A Searchable Datasheet
-
-This feature of the application would provide functionality to visualize entire datatables and with search functionalities.
+This feature of the application would provide functionality to visualize entire datatables and with search functionalities. Visualize entire datasets with 10 records per page.
 
 ```
- - Visualize entire datasets with 10 records per page.
- 
- - This has a functionality to search a value (numeric or texts) within data
- 
- - Another feature is one can search a value within a single column
+ - Using  `renderDataTable()` to display data on the webpage.
 
 ```
 One can increase the number of rows to be viewed from the menu "records per page".
 
 --- .class #id 
 
-## Features [3/3]
-
-### Feature 3: Cluster Analysis
-
+## Feature 3: Cluster Analysis
 
 The second section of the application is cluster analysis of the data using 2 numeric columns of the dataset selected using two different clustering techniques viz. K-means and Ward.
 
 
-1. K-Means Clustering 
-```
-        - Plot ditributions of the two variables/columns selected
-        
-        - Plot K-Means Clusters 
-        
-        - k-means Summary output
-        
-        - Plot two principal components 
-        
-        - Centroid Plots
-```
-2. Ward Clustering: plot dendogram
+. K-Means Clustering 
 
+```r
+clust<-kmeans(iris[, c("Sepal.Length", "Sepal.Width")], 3)
+summary(clust$cluster)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    1.00    1.00    2.00    1.98    3.00    3.00
+```
+
+. Ward Clustering: plot dendogram
+
+ I have used `hclust(data, method="ward.D2")` to generate dendogram
 
 
 --- .class #id 
